@@ -1,10 +1,10 @@
 from django.shortcuts import render
 
 lighthouses = [
-  {'name': 'Planier Light', 'location': 'Marseille, France', 'height': 66, 'constructed': 1326},
-  {'name': 'Maasvlakte Light', 'location': 'Maasvlakte, Netherlands', 'height': 66, 'constructed': 1974},
-  {'name': 'Bari Light', 'location': 'Bari, Italy', 'height': 62, 'constructed': 1869},
-  {'name': 'Punta Penna Lighthouse', 'location': 'Vasto, Italy', 'height': 70, 'constructed': 1906},
+  {'name': 'Planier Light', 'location': 'Marseille, France', 'height': 66, 'built': 1326},
+  {'name': 'Maasvlakte Light', 'location': 'Maasvlakte, Netherlands', 'height': 66, 'built': 1974},
+  {'name': 'Bari Light', 'location': 'Bari, Italy', 'height': 62, 'built': 1869},
+  {'name': 'Punta Penna Lighthouse', 'location': 'Vasto, Italy', 'height': 70, 'built': 1906},
 ]
 
 # Create your views here.
