@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Lighthouse Details</h1>
+
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ lighthouse.name }}</span>
+        <p>Location: {{ lighthouse.location }}</p>
+        <p>Height: {{ lighthouse.height }}m</p>
+        <p>Built: {{ lighthouse.built }}</p>
+        <p>Description: {{ lighthouse.description|linebreaks }}</p>
+    </div>
+    <div class="card-action">
+        <a href="{% url 'lighthouses_update' lighthouse.id %}">Edit</a>
+        <a href="{% url 'lighthouses_delete' lighthouse.id %}">Delete</a>
+    </div>
+</div>
+{% endblock %}

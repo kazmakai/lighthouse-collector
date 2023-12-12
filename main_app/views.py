@@ -1,11 +1,8 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+# Import the Lighthouse Model
+from .models import Lighthouse
 
-lighthouses = [
-  {'name': 'Planier Light', 'location': 'Marseille, France', 'height': 66, 'built': 1326},
-  {'name': 'Maasvlakte Light', 'location': 'Maasvlakte, Netherlands', 'height': 66, 'built': 1974},
-  {'name': 'Bari Light', 'location': 'Bari, Italy', 'height': 62, 'built': 1869},
-  {'name': 'Punta Penna Lighthouse', 'location': 'Vasto, Italy', 'height': 70, 'built': 1906},
-]
 
 # Create your views here.
 def home(request):
@@ -15,6 +12,26 @@ def about(request):
     return render(request, 'about.html')
 
 def lighthouses_index(request):
-    return render(request, 'lighthouses/index.html', {
+    lighthouses = Lighthouse.objects.all() # Retrive all lighthouses
+    return render(request, 'lighthouses/index.html', 
+    {
         'lighthouses': lighthouses
-    })
+    }
+)
+
+def lighthouses_detail(request, lighthouse_id): 
+    # need the lighthouse_id parameter because of lighthouse/<int:lighthouse_id> in urls.py
+    lighthouse = Lighthouse.objects.get(id=lighthouse_id)
+    return render(request, 'lighthouses/detail.html', { 'lighthouse': lighthouse })
+
+class LighthouseCreate(CreateView):
+    model = Lighthouse
+    fields = '__all__'
+
+class LighthouseUpdate(UpdateView):
+    model = Lighthouse
+    fields = ['location', 'built', 'description']
+
+class LighthouseDelete(DeleteView):
+    model = Lighthouse
+    success_url = '/lighthouses'
