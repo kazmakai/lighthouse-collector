@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
-from .models import Lighthouse
+# Import your models here
+from .models import Lighthouse, Visitor
 
 # Register your models here
 admin.site.register(Lighthouse)
+admin.site.register(Visitor)

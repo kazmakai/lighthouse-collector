@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Import the Lighthouse Model
 from .models import Lighthouse
+from .forms import VisitorForm
 
 
 # Create your views here.
@@ -22,7 +23,18 @@ def lighthouses_index(request):
 def lighthouses_detail(request, lighthouse_id): 
     # need the lighthouse_id parameter because of lighthouse/<int:lighthouse_id> in urls.py
     lighthouse = Lighthouse.objects.get(id=lighthouse_id)
-    return render(request, 'lighthouses/detail.html', { 'lighthouse': lighthouse })
+    visitor_form = VisitorForm()
+    return render(request, 'lighthouses/detail.html', { 
+        'lighthouse': lighthouse, 'visitor_form': visitor_form 
+    })
+
+def add_visitor(request, lighthouse_id):
+    form = VisitorForm(request.POST)
+    if form.is_valid():
+        new_visitor = form.save(commit=False)
+        new_visitor.lighthouse_id = lighthouse_id
+        new_visitor.save()
+    return redirect('detail', lighthouse_id=lighthouse_id)
 
 class LighthouseCreate(CreateView):
     model = Lighthouse
